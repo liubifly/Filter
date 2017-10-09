@@ -1,0 +1,4 @@
+﻿  datatest.cpp
+d:\code\filter\filter\datatest.cpp(30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Filter.vcxproj -> D:\Code\Filter\Debug\Filter.exe
+  Filter.vcxproj -> D:\Code\Filter\Debug\Filter.pdb (Partial PDB)
