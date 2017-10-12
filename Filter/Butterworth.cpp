@@ -33,7 +33,7 @@
 #include <algorithm>
 #include "Butterworth.h"
 
-#define LOG_OUTPUT 1    // Enable output logging
+#define LOG_OUTPUT 0    // Enable output logging
 
 using namespace std;
 
@@ -176,6 +176,7 @@ bool Butterworth::coefficients(FILTER_TYPE filter, const double fs, const double
 	nba = 0;
 	ba = new double[2 * std::max(numPoles, numZeros) + 5];
 	preBLTgain = gain;
+
 
 	if(!s2Z()){
 		#if LOG_OUTPUT

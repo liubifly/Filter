@@ -1,14 +1,36 @@
+/*
+	File: EEGFilter.cpp
+	Created on: 2017.10.9
+	Author: Bifei Liu
+
+*/
+
 #include "stdafx.h"
-#include "Biquad.h"
 #include "EEGFilter.h"
-#include <iostream>
 
 using namespace std;
 
 
-
-double* EEGFilter(double *input)
+void EEGFilter::initCoeffs(int numFilters, double inputCoeffs[][5], double gain)
 {
-	double a = 1.0;
-	return &a;
-}	
+	overallGain = gain;
+	coeffs.resize(numFilters);
+	biquadCoeffs.resize(numFilters);
+	for (int ii = 0; ii < numFilters; ii++)
+	{
+		coeffs[ii].b0 = inputCoeffs[ii][0];
+		coeffs[ii].b1 = inputCoeffs[ii][1];
+		coeffs[ii].b2 = inputCoeffs[ii][2];
+		coeffs[ii].a1 = inputCoeffs[ii][3];
+		coeffs[ii].a2 = inputCoeffs[ii][4];
+	}
+}
+
+void EEGFilter::filter(float* input, float *output, int count)
+{
+	biquadCoeffs.processBiquad(input, output, 1, count, &coeffs[0]);
+	for (int ii = 0; ii < count; ii++)
+	{
+		output[ii] *= overallGain;
+	}
+}
